@@ -116,6 +116,11 @@ cover-web:
 clean-integration:
 	docker-compose kill
 	docker-compose rm -v -f
+	sudo lsof -i:8084 ## see a specific port such as 22 ##
+	sudo lsof -i -P -n | grep LISTEN
+	sudo kill -9 `sudo lsof -t -i:8084`
+	sudo lsof -i:8084 ## see a specific port such as 22 ##
+	sudo lsof -i -P -n | grep LISTEN
 
 test-integration: clean-integration
 	docker-compose up -d
